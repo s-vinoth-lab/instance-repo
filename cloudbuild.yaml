@@ -2,6 +2,10 @@ steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/notes-app:$SHORT_SHA', '-t', 'gcr.io/$PROJECT_ID/notes-app:latest', '.']
+    
+options:
+  logging: CLOUD_LOGGING_ONLY  # You can also use CLOUD_LOGGING_ONLY or NONE as per the error message
+  logs_bucket: 'gs://log-bucket1112'
 
   # Push the container image with the short SHA tag
   - name: 'gcr.io/cloud-builders/docker'
