@@ -16,10 +16,11 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/notes-app:latest']
 
-# Options and Images must be top-level keys (no indentation)
+# Top-level field
+logs_bucket: 'gs://log-bucket1112'
+
 options:
   logging: CLOUD_LOGGING_ONLY
-  logs_bucket: 'gs://log-bucket1112'
 
 images:
   - 'gcr.io/$PROJECT_ID/notes-app:$SHORT_SHA'
