@@ -16,11 +16,12 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/notes-app:latest']
 
-# Top-level field
+# Specify the bucket for your logs
 logs_bucket: 'gs://log-bucket1112'
 
 options:
-  logging: CLOUD_LOGGING_ONLY
+  # GCS_ONLY or NONE are valid when using a logs_bucket
+  logging: GCS_ONLY 
 
 images:
   - 'gcr.io/$PROJECT_ID/notes-app:$SHORT_SHA'
