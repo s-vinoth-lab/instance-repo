@@ -3,26 +3,18 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build', 
-      '-t', 'gcr.io/$PROJECT_ID/capstone-repo/notes-app:$SHORT_SHA', 
-      '-t', 'gcr.io/$PROJECT_ID/capstone-repo/notes-app:latest', 
+      '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/capstone-repo/notes-app:$SHORT_SHA', 
+      '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/capstone-repo/notes-app:latest', 
       '.'
     ]
-
-  # 2. Push the container image with the short SHA tag
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/notes-app:$SHORT_SHA']
-
-  # 3. Push the container image with the 'latest' tag
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/notes-app:latest']
 
 # Specify the bucket for your logs
 logs_bucket: 'gs://log-bucket1112'
 
 options:
-  # GCS_ONLY or NONE are valid when using a logs_bucket
   logging: GCS_ONLY 
 
+# 2. Automatically push to your Artifact Registry
 images:
-  - 'gcr.io/$PROJECT_ID/notes-app:$SHORT_SHA'
-  - 'gcr.io/$PROJECT_ID/notes-app:latest'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/capstone-repo/notes-app:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/capstone-repo/notes-app:latest'
