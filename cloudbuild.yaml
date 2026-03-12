@@ -1,0 +1,16 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/notes-app:$SHORT_SHA', '-t', 'gcr.io/$PROJECT_ID/notes-app:latest', '.']
+
+  # Push the container image with the short SHA tag
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/notes-app:$SHORT_SHA']
+
+  # Push the container image with the 'latest' tag
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/notes-app:latest']
+
+images:
+  - 'gcr.io/$PROJECT_ID/notes-app:$SHORT_SHA'
+  - 'gcr.io/$PROJECT_ID/notes-app:latest'
